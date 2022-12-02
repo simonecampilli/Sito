@@ -1,0 +1,38 @@
+{%  extends 'base.html' %}
+{% block content %}
+
+<h1> Post</h1>
+
+<h1>{{ question.question_text }}</h1>
+
+<ul>
+{% for choice in question.choice_set.all %}
+    <div class="card mb-3" style="max-width: 540px;">
+  <div class="row no-gutters">
+    <div class="col-md-4">
+
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+       <li>{{ choice.choice_text }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}</li>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+{% endfor %}
+</ul>
+
+<a href="{% url 'detail' question.id %}" class="btn btn-primary" >Vote again?</a>
+<a href="{% url 'classifica' question.id  %}" class="btn btn-primary" >classifica</a>
+
+
+
+
+
+
+{% endblock %}
+

@@ -1,0 +1,22 @@
+{%  extends 'base.html' %}
+{% block title %} Aggiungi un nuovo atleta{% endblock %}
+
+{% block content %}
+
+    {%  if user.is_authenticated %}
+<ul>
+<h1> Add Post...</h1>
+<br><br>
+    <div class="form-group">
+        <form method="POST" enctype="multipart/form-data">  <!-- per permettere le immagini -->
+            {% csrf_token  %}<!-- per proteggere dagli hacker -->
+            {{  form.media }} <!--- per l'editor di testo -->
+            {{  form.as_p }} <!-- creo un form da django in automatico. ogni campo del form sarà un p -->
+            <button  class="btn btn-primary">POST</button>
+
+        </form>
+    </div>
+</ul>
+
+{% endif %}
+{% endblock %}

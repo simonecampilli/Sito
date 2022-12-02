@@ -1,0 +1,51 @@
+{%  extends 'base.html' %}
+{% block title %} Modifica un post{% endblock %}
+{% block content %}
+
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<fieldset>
+    <legend><h1>Quadri più in tendenza</h1></legend>
+
+    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+<div class="card-group">
+
+{% for nomi in classifica%}
+
+    <div class="card">
+    <div class="card-body">
+      <h4 class="card-title">{{nomi.choice_text}} </h4>
+
+        {%  if nomi.header_image %}
+        <img src="{{ nomi.header_image.url }}" width="200" height="250" style="max-width:100%;">
+
+        {%  else %}
+        <img src="..." class="card-img" alt="...">
+        {% endif %}
+
+      <p class="card-text">{{ forloop.counter }} </p>
+
+
+         </span>
+
+    </div>
+  </div>
+        {% if forloop.counter|divisibleby:3 %}
+            </div>
+            <div class="card-group">
+
+        {% endif %}
+
+    <br>
+{% endfor %}
+</div>
+</fieldset>
+
+
+</form>
+<a href="{%  url 'home'  %}" class="btn btn-primary">Home</a>
+
+{% endblock %}

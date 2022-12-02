@@ -1,0 +1,25 @@
+{%  extends 'base.html' %}
+
+
+{% block title %} Modifica un post{% endblock %}
+
+{% block content %}
+
+    {% load static %}
+
+<link rel="stylesheet" href="{% static 'prova/style.css' %}"> <!--- per caricare i file static --->
+
+{% if latest_question_list %}
+    <ul>
+    {% for question in latest_question_list %}
+        <li class="list-group-item "><a href="{% url 'detail' question.pk %}">{{ question.question_text }}</a>
+
+        <!--- #meno hardcorded  NOTA BENE devo specificare l'app polls:detail in modo che sappia distinguere le varie parti -->
+
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
+
+{% endblock %}

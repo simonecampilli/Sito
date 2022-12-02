@@ -1,0 +1,61 @@
+
+
+{%  extends 'base.html' %}
+{% block title %} Vota il tuo quadro preferito{% endblock %}
+{% block content %}
+
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<form action="{% url 'vote' question.id %}" method="post" enctype="multipart/form-data" >
+{% csrf_token %}
+
+<fieldset>
+    <legend><h1>{{ question.question_text }}</h1></legend>
+<h1></h1>
+    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+<div class="card-group">
+    {% for choice in question.choice_set.all %}
+
+
+
+
+
+  <div class="card">
+    <div class="card-body">
+      <h4 class="card-title">{{ choice }} </h4>
+
+        {%  if choice.header_image %}
+        <img src="{{ choice.header_image.url }}" width="200" height="250" style="max-width:100%;">
+     {%  else %}
+      <img src="..." class="card-img" alt="...">
+        {% endif %}
+
+
+      <p class="card-text">  </p>
+         <span style="width:100%;"> <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
+        <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label>
+             {%  if user.is_authenticated %}
+             <a href="{%  url 'update_atleta' choice.pk %}">(Edit)</a>
+            <a href="{%  url 'delete_atleta' choice.pk %}">(Delete)</a>
+             {% endif %}
+         </span>
+
+    </div>
+  </div>
+        {% if forloop.counter|divisibleby:3 %}
+            </div>
+            <div class="card-group">
+
+        {% endif %}
+
+    {% endfor %}
+</div>
+</fieldset>
+<input type="submit" value="Vote" class="btn btn-primary">
+
+</form>
+
+
+{% endblock %}

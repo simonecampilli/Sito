@@ -1,0 +1,21 @@
+{%  extends 'base.html' %}
+{% block title %} Modifica un post{% endblock %}
+
+{% block content %}
+
+    {%  if user.is_authenticated %}
+<ul>
+<h1> elimina post<br>
+    <div class="form-group">
+        <form method="POST">
+            {% csrf_token  %}<!-- per proteggere dagli hacker -->
+
+
+            <button  class="btn btn-primary">delete</button>
+
+        </form>
+    </div>
+</ul>
+
+{% endif %}
+{% endblock %}

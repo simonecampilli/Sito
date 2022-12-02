@@ -1,0 +1,20 @@
+{%  extends 'base.html' %}
+{% block title %} LOGIN{% endblock %}
+
+{% block content %}
+<ul>
+<h1> Login</h1>
+<br><br>
+    <div class="form-group">
+        <form method="POST">
+            {% csrf_token  %}<!-- per proteggere dagli hacker -->
+
+            {{  form.as_p }} <!-- creo un form da django in automatico. ogni campo del form sarà un p -->
+            <button  class="btn btn-primary">Login</button>
+
+        </form>
+    </div>
+</ul>
+
+
+{% endblock %}
